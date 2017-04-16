@@ -16,8 +16,8 @@ import java.util.Map;
 @ApplicationScoped
 public class Hirn {
 
-    private static final String TUER_ZU = "tür zu";
-    private static Map<String, LocalDate> gedaechniss = new HashMap<>();
+    private static final String TUER_ZU = "Tür zu";
+    private Map<String, LocalDate> gedaechniss = new HashMap<>();
 
     @Inject
     private Mund mund;
@@ -26,7 +26,7 @@ public class Hirn {
         if (oldStatus != newStatus && newStatus == StatusType.ONLINE) {
             String key = TUER_ZU + user.getName();
             if (!gedaechniss.getOrDefault(key, LocalDate.MIN).isEqual(LocalDate.now())) {
-                mund.sendMessage("Tür zu!");
+                mund.sendMessage(TUER_ZU);
                 gedaechniss.put(key, LocalDate.now());
             }
         }
