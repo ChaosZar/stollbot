@@ -77,7 +77,10 @@ class HirnSpock extends Specification {
         ]
 
         and: 'a Hirn'
-        Hirn hirn = new Hirn(mund: mund)
+        Hirn hirn = new Hirn(
+                mund: mund,
+                gedaechniss: cache
+        )
 
         and: 'a mocked Discord user'
         IUser user = Mock(IUser) {

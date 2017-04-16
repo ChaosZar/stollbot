@@ -7,7 +7,9 @@ import sx.blah.discord.handle.obj.StatusType;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,7 +25,7 @@ public class Hirn {
     private Mund mund;
 
     public void shoutTuerZu(IUser user, StatusType oldStatus, StatusType newStatus) {
-        if (oldStatus != newStatus && newStatus == StatusType.ONLINE) {
+        if (oldStatus != StatusType.ONLINE && newStatus == StatusType.ONLINE) {
             String key = TUER_ZU + user.getName();
             if (!gedaechniss.getOrDefault(key, LocalDate.MIN).isEqual(LocalDate.now())) {
                 mund.sendMessage(TUER_ZU);
@@ -34,10 +36,15 @@ public class Hirn {
     }
 
     private void clearGedaechniss() {
+        List<String> toRemoveList = new ArrayList<>();
         for (Map.Entry<String, LocalDate> entry : gedaechniss.entrySet()) {
             if (entry.getValue().isBefore(LocalDate.now())) {
-                gedaechniss.remove(entry.getKey());
+                toRemoveList.add(entry.getKey());
             }
         }
+        for (String toRemoveKey : toRemoveList) {
+            gedaechniss.remove(toRemoveKey);
+        }
+
     }
 }
