@@ -7,9 +7,8 @@ import sx.blah.discord.handle.obj.StatusType;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -19,7 +18,7 @@ import java.util.Map;
 public class Hirn {
 
     private static final String TUER_ZU = "Tür zu";
-    private Map<String, LocalDate> gedaechniss = new HashMap<>();
+    private Map<LocalDate, HashSet<String>> gedaechniss = new HashMap<>();
 
     @Inject
     private Mund mund;
@@ -27,24 +26,23 @@ public class Hirn {
     public void shoutTuerZu(IUser user, StatusType oldStatus, StatusType newStatus) {
         if (oldStatus != StatusType.ONLINE && newStatus == StatusType.ONLINE) {
             String key = TUER_ZU + user.getName();
-            if (!gedaechniss.getOrDefault(key, LocalDate.MIN).isEqual(LocalDate.now())) {
+            if (!doRemember(key)) {
                 mund.sendMessage(TUER_ZU);
-                gedaechniss.put(key, LocalDate.now());
             }
         }
-        clearGedaechniss();
     }
 
-    private void clearGedaechniss() {
-        List<String> toRemoveList = new ArrayList<>();
-        for (Map.Entry<String, LocalDate> entry : gedaechniss.entrySet()) {
-            if (entry.getValue().isBefore(LocalDate.now())) {
-                toRemoveList.add(entry.getKey());
-            }
-        }
-        for (String toRemoveKey : toRemoveList) {
-            gedaechniss.remove(toRemoveKey);
-        }
+    private boolean doRemember(String key) {
+        LocalDate today = LocalDate.now();
 
+        if (!gedaechniss.containsKey(today)) {
+            gedaechniss = new HashMap<>();
+            gedaechniss.put(today, new HashSet<>());
+        }
+        if (gedaechniss.get(today).contains(key)) {
+            return true;
+        }
+        gedaechniss.get(today).add(key);
+        return false;
     }
 }
