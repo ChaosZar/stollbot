@@ -38,6 +38,8 @@ dependencies {
     compile group: 'org.jboss.weld.se', name: 'weld-se', version: '2.4.3.Final'
 }
 
+compileJava.options.encoding = 'UTF-8'
+
 build.doLast {
     GFileUtils.copyFile(
             new File(buildDir, 'resources/main/META-INF/beans.xml'),

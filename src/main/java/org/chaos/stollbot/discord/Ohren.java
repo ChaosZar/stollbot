@@ -18,7 +18,7 @@ public class Ohren {
     private Hirn hirn;
 
     @EventSubscriber
-    public void onReadyEvent(PresenceUpdateEvent event) {
+    public void onPresenceUpdateEvent(PresenceUpdateEvent event) {
         Logger.getLogger(Ohren.class.getName()).fine("entered with UserJoinEvent");
         hirn.shoutTuerZu(event.getUser(), event.getOldPresence().getStatus(), event.getNewPresence().getStatus());
     }
