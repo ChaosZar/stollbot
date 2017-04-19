@@ -49,12 +49,8 @@ public class Hirn {
     }
 
     public void sendRandomMessage() {
-        int pos = getRandomNumber(RandomMessages.values().length);
-        RandomMessages[] values = RandomMessages.values();
-        mund.sendMessage(values[pos]);
+        int pos = RandomUtils.nextInt(0, RandomMessages.values().length);
+        mund.sendMessage(RandomMessages.values()[pos]);
     }
 
-    private int getRandomNumber(int max) {
-        return (int) (RandomUtils.nextDouble() * max);
-    }
 }

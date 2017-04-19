@@ -51,6 +51,7 @@ build.doLast {
 }
 
 jar {
+    dependsOn(':copyDependencys')
     manifest {
         attributes(
                 'Class-Path': configurations.compile.collect { 'lib/' + it.getName() }.join(' '),
@@ -59,7 +60,7 @@ jar {
     }
 }
 
-jar.doLast {
+task copyDependencys(type: Jar) {
     from {
         configurations.compile.collect {
             if (it.isDirectory()) {
