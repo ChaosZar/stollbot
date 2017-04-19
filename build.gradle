@@ -36,6 +36,9 @@ dependencies {
 
     //Weld  - CDI
     compile group: 'org.jboss.weld.se', name: 'weld-se', version: '2.4.3.Final'
+    // -- CDI-Scheduler
+    compile group: 'de.mirkosertic.cdicron', name: 'cdi-cron-quartz-scheduler', version: '1.0'
+
 }
 
 compileJava.options.encoding = 'UTF-8'

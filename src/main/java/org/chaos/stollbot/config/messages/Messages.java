@@ -1,4 +1,4 @@
-package org.chaos.stollbot.config;
+package org.chaos.stollbot.config.messages;
 
 import javax.enterprise.context.Dependent;
 import java.util.ResourceBundle;
@@ -23,5 +23,9 @@ public class Messages {
             return key;
         }
         return messages.getString(key);
+    }
+
+    public String getMessage(MessageKey messageKey) {
+        return getMessage(messageKey.name());
     }
 }

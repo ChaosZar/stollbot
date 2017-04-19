@@ -1,8 +1,10 @@
 package org.chaos.stollbot.discord;
 
 import org.chaos.stollbot.config.Config;
-import org.chaos.stollbot.config.Messages;
 import org.chaos.stollbot.config.Preferred;
+import org.chaos.stollbot.config.messages.MessageKey;
+import org.chaos.stollbot.config.messages.Messages;
+import org.chaos.stollbot.config.messages.RandomMessages;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.handle.obj.IGuild;
 import sx.blah.discord.util.MessageBuilder;
@@ -28,6 +30,15 @@ public class Mund {
     private Config config;
 
     /**
+     * Sends message for an enum key.
+     *
+     * @param message enum wich contains message key.
+     */
+    public void sendMessage(MessageKey message) {
+        sendMessage(message.name());
+    }
+
+    /**
      * Reads a message from resource bundle und sends it to the chat.
      *
      * @param key key to message
@@ -48,5 +59,9 @@ public class Mund {
                 .appendContent(message)
                 .withChannel(guild.getGeneralChannel())
                 .build();
+    }
+
+    public void sendMessage(RandomMessages messageKey) {
+        sendMessage(messageKey.name());
     }
 }

@@ -1,5 +1,8 @@
 package org.chaos.stollbot;
 
+import org.apache.commons.lang3.RandomUtils;
+import org.chaos.stollbot.config.messages.MessageKey;
+import org.chaos.stollbot.config.messages.RandomMessages;
 import org.chaos.stollbot.discord.Mund;
 import sx.blah.discord.handle.obj.IUser;
 import sx.blah.discord.handle.obj.StatusType;
@@ -17,7 +20,6 @@ import java.util.Map;
 @ApplicationScoped
 public class Hirn {
 
-    private static final String TUER_ZU = "Tür zu";
     private Map<LocalDate, HashSet<String>> gedaechniss = new HashMap<>();
 
     @Inject
@@ -25,9 +27,9 @@ public class Hirn {
 
     public void shoutTuerZu(IUser user, StatusType oldStatus, StatusType newStatus) {
         if (oldStatus != StatusType.ONLINE && newStatus == StatusType.ONLINE) {
-            String key = TUER_ZU + user.getName();
+            String key = MessageKey.ZUER_ZU.name() + user.getName();
             if (!doRemember(key)) {
-                mund.saySomething(TUER_ZU);
+                mund.sendMessage(MessageKey.ZUER_ZU);
             }
         }
     }
@@ -44,5 +46,15 @@ public class Hirn {
         }
         gedaechniss.get(today).add(key);
         return false;
+    }
+
+    public void sendRandomMessage() {
+        int pos = getRandomNumber(RandomMessages.values().length);
+        RandomMessages[] values = RandomMessages.values();
+        mund.sendMessage(values[pos]);
+    }
+
+    private int getRandomNumber(int max) {
+        return (int) (RandomUtils.nextDouble() * max);
     }
 }
