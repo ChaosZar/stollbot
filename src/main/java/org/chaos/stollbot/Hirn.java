@@ -27,7 +27,7 @@ public class Hirn {
         if (oldStatus != StatusType.ONLINE && newStatus == StatusType.ONLINE) {
             String key = TUER_ZU + user.getName();
             if (!doRemember(key)) {
-                mund.sendMessage(TUER_ZU);
+                mund.saySomething(TUER_ZU);
             }
         }
     }

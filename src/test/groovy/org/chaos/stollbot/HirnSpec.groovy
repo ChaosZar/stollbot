@@ -15,7 +15,7 @@ class HirnSpec extends Specification {
     def 'Should send a message when a user comes online'() {
         given: 'a Mund'
         Mund mund = Mock(Mund) {
-            1 * sendMessage(Hirn.TUER_ZU)
+            1 * saySomething(Hirn.TUER_ZU)
             0 * _
         }
 
@@ -65,7 +65,7 @@ class HirnSpec extends Specification {
     def 'Should send only one message when a user comes online twice a day'() {
         given: 'a Mund'
         Mund mund = Mock(Mund) {
-            1 * sendMessage(Hirn.TUER_ZU)
+            1 * saySomething(Hirn.TUER_ZU)
             0 * _
         }
 
@@ -92,7 +92,7 @@ class HirnSpec extends Specification {
     def 'Should remove old entrys from cache when they are not from today'() {
         given: 'a Mund'
         Mund mund = Mock(Mund) {
-            1 * sendMessage(Hirn.TUER_ZU)
+            1 * saySomething(Hirn.TUER_ZU)
             0 * _
         }
 
