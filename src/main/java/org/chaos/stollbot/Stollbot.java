@@ -24,7 +24,6 @@ public class Stollbot {
     @Inject
     private Ohren ohren;
 
-
     public void main(@Observes ContainerInitialized event) {
         logger.info("entering main");
         EventDispatcher dispatcher = client.getClient().getDispatcher();

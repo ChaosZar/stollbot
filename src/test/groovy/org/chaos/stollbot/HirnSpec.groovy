@@ -7,7 +7,7 @@ import sx.blah.discord.handle.obj.StatusType
 
 import java.time.LocalDate
 
-class HirnSpock extends Specification {
+class HirnSpec extends Specification {
 
 
     public static final String MOCKED_USERNAME = 'MOCKED_USERNAME'

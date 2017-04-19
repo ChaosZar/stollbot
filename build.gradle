@@ -16,25 +16,25 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    //discord API
+    //discord API - to use Discord
     compile "com.github.austinv11:Discord4j:dev-SNAPSHOT"
 
-    //spock
+    //spock - testing
+    testCompile group: 'junit', name: 'junit', version: '4.12'
     compile "org.codehaus.groovy:groovy-all:2.4.1"
     testCompile "org.spockframework:spock-core:1.1-groovy-2.4-rc-3"
     testCompile "org.hamcrest:hamcrest-core:1.3"
     testRuntime "cglib:cglib-nodep:3.2.4"
     testRuntime "org.objenesis:objenesis:2.5.1"
 
-    //xstream
+    //xstream - to load config
     compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.2'
 
     //logging
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
 
-    //Weld (CDI)
+    //Weld  - CDI
     compile group: 'org.jboss.weld.se', name: 'weld-se', version: '2.4.3.Final'
 }
 

@@ -17,7 +17,7 @@ public class ConfigFactory {
     @Produces
     @Preferred
     @ApplicationScoped
-    public static Config produceConfig() {
+    public static synchronized Config produceConfig() {
         XStream xStream = new XStream();
         xStream.processAnnotations(Config.class);
 
@@ -37,5 +37,4 @@ public class ConfigFactory {
         }
         return config;
     }
-
 }

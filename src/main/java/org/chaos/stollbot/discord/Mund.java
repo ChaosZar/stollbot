@@ -2,6 +2,7 @@ package org.chaos.stollbot.discord;
 
 import org.chaos.stollbot.config.Config;
 import org.chaos.stollbot.config.Preferred;
+import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.handle.obj.IGuild;
 import sx.blah.discord.util.MessageBuilder;
 
@@ -22,10 +23,11 @@ public class Mund {
     private Config config;
 
     public void sendMessage(String message) {
-        IGuild guildByID = client.getClient().getGuildByID(config.getGuildId());
-        new MessageBuilder(client.getClient())
+        IDiscordClient client = this.client.getClient();
+        IGuild guild = client.getGuildByID(config.getGuildId());
+        new MessageBuilder(client)
                 .appendContent(message)
-                .withChannel(guildByID.getGeneralChannel())
+                .withChannel(guild.getGeneralChannel())
                 .build();
     }
 }
