@@ -37,6 +37,31 @@ class HirnSpock extends Specification {
         oldStatus << [StatusType.IDLE, StatusType.OFFLINE, StatusType.STREAMING, StatusType.DND, StatusType.UNKNOWN]
     }
 
+    def 'Should ignore shouting if status is not changed'() {
+        given: 'a Mund'
+        Mund mund = Mock(Mund) {
+            0 * _
+        }
+
+        and: 'a mocked Discord user'
+        IUser user = Mock(IUser) {
+            0 * getName() >> MOCKED_USERNAME
+            0 * _
+        }
+
+        and: 'a Hirn'
+        Hirn hirn = new Hirn(mund: mund)
+
+        when: 'shoutTuerZu is called'
+        hirn.shoutTuerZu(user, status, status)
+
+        then:
+        hirn.gedaechniss.size() == 0
+
+        where:
+        status << StatusType.values()
+    }
+
     def 'Should send only one message when a user comes online twice a day'() {
         given: 'a Mund'
         Mund mund = Mock(Mund) {
@@ -49,7 +74,8 @@ class HirnSpock extends Specification {
 
         and: 'a mocked Discord user'
         IUser user = Mock(IUser) {
-            getName() >> MOCKED_USERNAME
+            2 * getName() >> MOCKED_USERNAME
+            0 * _
         }
 
         when: 'shoutTuerZu is called'
@@ -84,7 +110,8 @@ class HirnSpock extends Specification {
 
         and: 'a mocked Discord user'
         IUser user = Mock(IUser) {
-            getName() >> MOCKED_USERNAME
+            1 * getName() >> MOCKED_USERNAME
+            0 * _
         }
 
         when: 'shoutTuerZu is called'

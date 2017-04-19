@@ -1,13 +1,9 @@
 package org.chaos.stollbot.config;
 
-import javax.enterprise.context.Dependent;
-
 /**
  * Static Config.
- * TODO: Load from File
  */
-@Dependent
-public class StollConfig {
+public class Config {
 
     private String token = "";
     private String guildId = "";

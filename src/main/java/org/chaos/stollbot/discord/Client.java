@@ -1,6 +1,7 @@
 package org.chaos.stollbot.discord;
 
-import org.chaos.stollbot.config.StollConfig;
+import org.chaos.stollbot.config.Config;
+import org.chaos.stollbot.config.Preferred;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 
@@ -18,7 +19,8 @@ public class Client {
     private IDiscordClient client;
 
     @Inject
-    private StollConfig stollConfig;
+    @Preferred
+    private Config config;
 
     @PostConstruct
     public void init() {
@@ -27,9 +29,8 @@ public class Client {
 
     private IDiscordClient buildClient() {
         ClientBuilder clientBuilder = new ClientBuilder();
-        clientBuilder.withToken(stollConfig.getToken());
+        clientBuilder.withToken(config.getToken());
         return clientBuilder.login();
-
     }
 
     public IDiscordClient getClient() {

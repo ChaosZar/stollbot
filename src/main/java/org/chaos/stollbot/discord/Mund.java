@@ -1,6 +1,7 @@
 package org.chaos.stollbot.discord;
 
-import org.chaos.stollbot.config.StollConfig;
+import org.chaos.stollbot.config.Config;
+import org.chaos.stollbot.config.Preferred;
 import sx.blah.discord.handle.obj.IGuild;
 import sx.blah.discord.util.MessageBuilder;
 
@@ -17,7 +18,8 @@ public class Mund {
     private Client client;
 
     @Inject
-    private StollConfig config;
+    @Preferred
+    private Config config;
 
     public void sendMessage(String message) {
         IGuild guildByID = client.getClient().getGuildByID(config.getGuildId());
